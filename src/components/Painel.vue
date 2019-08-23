@@ -10,7 +10,7 @@
     <div class="v-center text-center">
       <slot></slot>
     </div>
-    <small class="rodape" v-if="flagType == 'conteudo'">Task Internet - 25 anos</small>
+    <small class="rodape" v-if="flagType == 'conteudo' && esconderLegenda == 1" >Task Internet - 25 anos</small>
   </div>
 </template>
 
@@ -18,6 +18,10 @@
 export default {
   props: {
     flagType: String,
+    esconderLegenda: {
+      type: Number,
+      default: 1,
+    }
   }
 }
 
@@ -67,7 +71,7 @@ export default {
         a {
           color: white;
           opacity: 0.6;
-          font-size: 1.5rem;
+          font-size: 1.3rem;
           transition: opacity 0.5s;
 
           &:hover {
@@ -79,6 +83,10 @@ export default {
 
     img {
       width: 50%;
+
+      &.timeline {
+        width: 90%;
+      }
     }
 
     h2 {
@@ -97,6 +105,7 @@ export default {
       color: white;
       opacity: 0.8;
       font-weight: lighter;
+      font-size: 1.6rem;
       margin-top: 25px;
       margin-bottom: 50px;
     }
@@ -117,6 +126,10 @@ export default {
 
   &.wrap-form {
     background-color: white;
+
+    .w {
+      text-align: justify;
+    }
 
     .display-etapas {
       color: #999;
@@ -158,11 +171,12 @@ export default {
     }
 
     form {
-      width: 50%;
-      margin: 0 auto;
+      width: 70%;
+      margin: 50px auto 0;
       text-align: left;
-
-
+      border: 1px solid #d2d8dd;
+      border-radius: 3px;
+      padding: 20px 40px 30px;
 
       .separador {
         border-top: 2px solid #ededed;
@@ -190,18 +204,18 @@ export default {
 
 
       .btn-submit {
-        background-color: #434bdf;
+        background-color: #f87204;
         border: 0;
-        height: calc(2.55rem + 2px);
         color: white;
+        outline: none;
         border-radius: 3px;
         font-weight: normal;
-        padding: 0 10px;
+        padding: 20px 50px;
       }
     }
 
     .wrap-descontos {
-      width: 60%;
+      width: 75%;
       margin: 0 auto;
 
       .desconto {
@@ -264,10 +278,26 @@ export default {
     }
 
     .descricao-sucesso {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: lighter;
       margin-top: 40px;
       color: #555;
+
+      &.home {
+        margin-top: 0;
+      }
+
+      b {
+        color: #434bdf;
+        font-weight: bold;
+      }
+
+      strong {
+        color: #434bdf;
+        font-weight: bold;
+        font-family: 'Satisfy', cursive;
+        font-size: 4rem;
+      }
     }
 
     .wrap-contato {
@@ -299,8 +329,8 @@ export default {
           margin: 0 5px;
 
           a {
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             background-color: black;
             display: block;
             border-radius: 5px;
@@ -310,7 +340,7 @@ export default {
             &.linkedin { background-color: #0077B5; }
             &.youtube { background-color: #ff0000; }
 
-            i { font-size: 1.3rem; margin-top: 8px; color: white;}
+            i { font-size: 1.3rem; margin-top: 6px; color: white;}
           }
         }
       }
@@ -321,6 +351,148 @@ export default {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+}
+@media (max-width: 576px) {
+  .wrap-conteudo {
+    h2 {
+      font-size: 1.2rem !important;
+    }
+
+    h3 {
+      font-size: 1.2rem !important;
+    }
+
+    p.w {
+      font-size: 0.8rem !important;
+    }
+
+    .logo {
+      width: 30% !important;
+    }
+  }
+
+  .wrap-form {
+    min-height: 100%;
+    .titulo-sucesso {
+      font-size: 1.3rem !important;
+      margin-top: 25px !important;
+    }
+
+    .descricao-sucesso {
+      font-size: 1.0rem !important;
+      margin-top: 0 !important;
+
+      strong {
+        font-size: 1.4rem !important;
+      }
+    }
+
+    .wrap-contato {
+      margin: 10px 0 !important;
+      height: 150px !important;
+      padding: 5px !important;
+    }
+
+    form {
+      border: 0 !important;
+      padding: 5px !important;
+      width: 100% !important;
+      margin-top: 0 !important;
+
+      .wrap-check {
+        .termos {
+          font-size: 0.8rem !important;
+        }
+      }
+
+      .desc-form {
+        font-size: 0.8rem !important;
+      }
+
+      .desconto {
+        img {
+          width: 22% !important;
+        }
+
+        .desc {
+          width: 67% !important;
+          h4.titulo {
+            font-size: 1rem !important;
+          }
+        }
+
+        .condicoes {
+          font-size: 1.2rem !important;
+        }
+      }
+
+      .btn-submit {
+        padding: 10px 50px !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 577px) and (max-width: 1360px) {
+  .wrap-conteudo {
+    p {
+      font-size: 0.8rem !important;
+    }
+  }
+
+  .wrap-form {
+    .descricao-sucesso {
+      font-size: 0.8rem !important;
+
+      strong {
+        font-size: 1.7rem !important;
+      }
+    }
+
+    .desc-form {
+      font-size: 0.8rem !important;
+    }
+
+    .wrap-check {
+      .termos {
+        font-size: 0.7rem !important;
+      }
+    }
+
+    .desconto {
+      .desc {
+        h4 {
+          font-size: 1rem !important;
+        }
+
+        .condicoes {
+          font-size: 1rem !important;
+        }
+      }
+
+    }
+
+    .wrap-contato {
+      p {
+        font-size: 0.7rem !important;
+      }
+
+      .lista-redes-sociais {
+        li {
+          a {
+            width: 23px !important;
+            height: 23px !important;
+
+            i {
+              font-size: 1rem !important;
+              line-height: 0 !important;
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>

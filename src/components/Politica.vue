@@ -83,7 +83,7 @@
       <h4 class="titulo">Regras promoção aniversário Task - 25 anos</h4>
       <strong>Validade:</strong>
       <p>
-        Promoção válida de 03/06/2019 a 28/06/2019
+        Promoção válida de 11/06/2019 a 28/06/2019
       </p>
 
       <strong>Detalhes da promoção:</strong>
@@ -141,6 +141,17 @@ export default {
 </script>
 
 <style lang="scss">
+
+@media (max-width: 576px) {
+  .texto {
+    width: 100% !important;
+
+    .titulo {
+      margin-top: 50px !important;
+    }
+  }
+}
+
 .texto {
   background-color: white;
   position: absolute;
@@ -150,6 +161,8 @@ export default {
   width: 50%;
   z-index: 1050;
   text-align: justify;
+  bottom: 0;
+  left: 0;
 
   &::-webkit-scrollbar-track {
     background-color: #F4F4F4;

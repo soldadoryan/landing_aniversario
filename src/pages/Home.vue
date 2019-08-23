@@ -9,35 +9,28 @@
     <passo v-if="nPasso == 1">
       <painel flag-type="conteudo">
         <img src="/img/taskinho1.png">
-        <h2>Task Internet - <span>25 Anos</span></h2>
+        <h2>Task - <span>25 Anos</span></h2>
         <h3>
-          Excelência em <strong>hospedagem de site</strong>, <strong>serviço de email</strong>,
+          Excelência em <strong>hospedagem de site</strong>, <strong>serviços de e-mail</strong>,
           <strong>servidor vps</strong> e <strong>servidor dedicado</strong>
         </h3>
-        <p class="w">
-          Para celebrar o nosso aniversário, preparamos <strong>descontos especiais</strong> em nossos planos e
-          vários benefícios para vocês, clientes e parceiros, que fazem parte da nossa história
-        </p>
       </painel>
       <painel flag-type="form">
-        <form autocomplete="off" v-on:submit.prevent="dadosIniciais">
+        <p class="descricao-sucesso home">
+          Para celebrar o nosso aniversário, preparamos <strong>descontos especiais</strong> em nossos planos
+          para vocês, clientes e parceiros, que fazem parte da nossa história.
+        </p>
+        <form autocomplete="off" id="form_dados_iniciais" v-on:submit.prevent="dadosIniciais">
           <span class="display-etapas">{{nPasso}}/2</span>
-          <span class="desc-form">Para conseguir o desconto, preencha o formulário abaixo:</span>
+          <span class="desc-form">Para ganhar o desconto, preencha o formulário abaixo:</span>
           <input type="text" required name="nome_completo" placeholder="Nome completo"/>
           <input type="email" required name="email" placeholder="E-mail"/>
           <input type="text" required name="telefone" placeholder="Telefone"/>
-          <div class="wrap-check">
-            <div class="check" @click="toggleCheck">
-              <i class="fas fa-check" v-if="termosCheck == 1"></i>
-            </div>
-            <span class="termos">
-              Por favor aceite nossos <a href="" v-on:click.prevent="abrirContratacao(1)">Termos de contratação</a> e <a href="" v-on:click.prevent="abrirPolitica(1)">Politicas de espaço/tráfego ilimitados e de e-mails</a>.
-            </span>
-          </div>
           <div class="separador"></div>
-          <div class="text-right">
-            <button type="submit" name="button" class="btn-submit">
-              Quero desconto!
+          <div class="text-center">
+            <button type="submit" name="button" class="btn-submit shadow animated shake">
+              <span v-if="showLoading == 0">Quero desconto!</span>
+              <i class="fas fa-spinner fa-pulse" v-if="showLoading == 1"></i>
             </button>
           </div>
         </form>
@@ -45,22 +38,22 @@
     </passo>
     <passo v-if="nPasso == 2">
       <painel flag-type="conteudo">
-        <img src="/img/taskinho1.png">
-        <h2>Um pouquinho sobre <span>a Task!</span></h2>
+        <iframe width="60%" height="300" src="https://www.youtube.com/embed/iKOx_D7H-kI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <h2>Um pouco sobre <span>a Task!</span></h2>
         <p class="w text-justify">
           Acompanhamos de perto a evolução da internet no Brasil e fizemos dela o nosso negócio! Em 1994,
           começamos como desenvolvedores de software e dois anos mais tarde nos tornamos um dos primeiros
           provedores de acesso à internet da capital mineira.
         </p>
         <p class="w text-justify">
-          Hoje, 25 anos depois, oferecemos altíssima tecnologia em serviços de hospedagem de sites, e-mails e servidores. A palavra-chave que norteia a empresa e seu envolvimento com a internet é a confiabilidade pela experiência no mercado.
+          Hoje, 25 anos depois, oferecemos altíssima tecnologia em serviços de hospedagem de sites, e-mails e servidores.
         </p>
       </painel>
-      <painel flag-type="form">
+      <painel flag-type="form escolher-planos">
         <form class="wrap-descontos" v-on:submit.prevent="enviarPlano">
           <span class="display-etapas">{{nPasso}}/2</span>
-          <span class="desc-form">Escolha o melhor desconto pra você:</span>
-          <div class="desconto" @click="escolherPlano" data-desconto="1">
+          <span class="desc-form">Escolha o melhor desconto para você:</span>
+          <div class="desconto active" @click="escolherPlano" data-desconto="1">
             <div class="wrap-check">
               <div class="check">
                 <i class="fas fa-check" v-if="nDesconto == 1"></i>
@@ -96,23 +89,32 @@
               <span class="condicoes"> 50% <small>no 1º mês</small></span>
             </div>
           </div>
+          <div class="wrap-check">
+            <div class="check" @click="toggleCheck">
+              <i class="fas fa-check" v-if="termosCheck == 1"></i>
+            </div>
+            <span class="termos">
+              Por favor aceite nossos <a href="" v-on:click.prevent="abrirContratacao(1)">Termos de contratação</a> e <a href="" v-on:click.prevent="abrirPolitica(1)">Politicas de espaço/tráfego ilimitados e de e-mails</a>.
+            </span>
+          </div>
           <div class="separador"></div>
-          <div class="text-right">
-            <button type="submit" name="button" class="btn-submit">
-              Escolher desconto
+          <div class="text-center">
+            <button type="submit" name="button" class="btn-submit shadow">
+              <span v-if="showLoading == 0">Escolher desconto</span>
+              <i class="fas fa-spinner fa-pulse" v-if="showLoading == 1"></i>
             </button>
           </div>
         </form>
       </painel>
     </passo>
     <passo v-if="nPasso == 3  ">
-      <painel flag-type="conteudo">
-        <img src="/img/timeline.png" alt="">
+      <painel flag-type="conteudo" esconder-legenda="0">
+        <img src="/img/timeline.png" class="timeline">
       </painel>
       <painel flag-type="form">
         <h4 class="titulo-sucesso">Agradecemos seu contato</h4>
         <p class="descricao-sucesso">
-          É um prazer ter você como cliente. Em breve o nosso setor comercial entrará em contato com você para finalizar o cadastro.
+          Parabéns! <b>Você já garantiu o seu desconto.</b> Em breve, o nosso setor comercial entrará em contato para finalizar o cadastro.
         </p>
         <div class="row">
           <div class="col-lg-4">
@@ -159,6 +161,10 @@ import Passo from '../components/Passo.vue'
 import Painel from '../components/Painel.vue'
 import Politica from '../components/Politica.vue'
 
+import axios from "axios";
+
+const API_URL = "http://api.task.com.br/api";
+
 export default {
   mounted () {
     $("input[name='telefone']").mask('(00) 00000-0000');
@@ -167,9 +173,11 @@ export default {
     return {
       termosCheck: 0,
       nPasso: 1,
-      nDesconto: 0,
+      nDesconto: 1,
       showPolitica: 0,
+      showLoading: 0,
       showContratacao: 0,
+      dadosCompletos: {},
     }
   },
   components: {
@@ -182,21 +190,25 @@ export default {
       this.termosCheck = !this.termosCheck;
     },
     dadosIniciais: function() {
-      if(this.termosCheck == 1) {
-        //submit
-        
-        this.abrirContratacao(0);
-        this.abrirPolitica(0);
-        this.nPasso = 2;
-      } else {
-        $(".notificacao #conteudo").text("Para continuar você precisa aceitar nossos termos!");
-        $(".notificacao").css("right", "25px");
+      var model = this;
+      this.showLoading = 1;
 
-        window.setTimeout(function() {
-          $(".notificacao").css("right", "-150%");
 
-        }, 3000);
-      }
+      this.dadosCompletos = new FormData();
+      this.dadosCompletos.append("customerPromotion", "25 Anos");
+      this.dadosCompletos.append("customerEmail", $("#form_dados_iniciais input[name='email']").val());
+      this.dadosCompletos.append("customerName", $("#form_dados_iniciais input[name='nome_completo']").val());
+      this.dadosCompletos.append("customerTelefone", $("#form_dados_iniciais input[name='telefone']").val());
+
+      var url = API_URL + "/envia-contato-promocao";
+
+      axios.post(url, this.dadosCompletos).then(function(response) {
+        model.abrirContratacao(0);
+        model.abrirPolitica(0);
+        model.nPasso = 2;
+        model.showLoading = 0;
+      });
+
     },
     escolherPlano: function(event) {
       $(".desconto").removeClass("active");
@@ -206,18 +218,34 @@ export default {
       this.nDesconto = desconto.attr("data-desconto");
     },
     enviarPlano: function(event) {
-      if(this.nDesconto != 0) {
-        // submit
+      this.showLoading = 1;
+      var model = this;
+      if(this.termosCheck == 1) {
 
-        this.nPasso = 3;
+
+        var url = API_URL + "/envia-contato-promocao";
+
+        if (this.nDesconto == 1)
+        this.dadosCompletos.append("customerPlan", "Hospedagem de site");
+        else if (this.nDesconto == 2)
+        this.dadosCompletos.append("customerPlan", "Loja virtual");
+        else
+        this.dadosCompletos.append("customerPlan", "Servidor virtual");
+
+        axios.post(url, this.dadosCompletos).then(function(response) {
+          model.nPasso = 3;
+          model.showLoading = 0;
+        });
+
       } else {
-        $(".notificacao #conteudo").text("Você precisa escolher um desconto para continuar!");
+        $(".notificacao #conteudo").text("Para continuar você precisa aceitar nossos termos!");
         $(".notificacao").css("right", "25px");
+        model.showLoading = 0;
 
         window.setTimeout(function() {
           $(".notificacao").css("right", "-150%");
 
-        }, 5000);
+        }, 3000);
       }
     },
     abrirContratacao: function(val) {
